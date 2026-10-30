@@ -79,7 +79,7 @@
     sideEl.innerHTML = '<h5>Dynasties</h5><a href="#/dynasties">All Dynasties</a>' +
       Object.keys(groups).map((g) => `<h5>${esc(g)}</h5>` + groups[g].map((d) =>
         `<a href="#/d/${d.slug}"${d.slug === active.slug ? ' class="on"' : ''}><i style="background:${d.p}"></i>${esc(d.name)}</a>`).join('')).join('') +
-      '<h5>Quick Links</h5><a href="#/players">Player Search</a>';
+      '<h5>Quick Links</h5><a href="#/players">Player Search</a><a href="#/admin"'+(active.nav==='admin'?' class="on"':'')+'>Control Panel</a>';
   }
 
   /* ---------- home / dynasties ---------- */
@@ -332,6 +332,7 @@
       if (!seg.length) await homeView();
       else if (seg[0] === 'dynasties') dynastiesView();
       else if (seg[0] === 'players') playersView();
+      else if (seg[0] === 'admin') { theme(null); drawChrome({ nav: 'admin' }); document.title = 'Control Panel · Dynasty Archive'; await window.DAAdmin.render(rootEl); }
       else if (seg[0] === 'd' && seg[1]) {
         if (seg[2] === 'p') await playerView(seg[1], +seg[3]);
         else if (seg[2] === 'a') await articleView(seg[1], seg.slice(3).join('/'));

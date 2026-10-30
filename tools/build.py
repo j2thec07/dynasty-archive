@@ -29,7 +29,9 @@ OUT = ROOT / "site" / "data"
 sys.path.insert(0, str(HERE))
 
 GAME_LABEL = {"cfb": "College Football 27", "ootp": "Out of the Park Baseball 27"}
-GAME_GROUP = {"cfb": "College Football", "ootp": "Baseball"}
+GAME_GROUP = {"cfb": "College Football", "ootp": "Baseball", "madden": "Madden", "nba": "NBA 2K",
+              "cbb": "College Basketball", "fm": "Football Manager", "other": "Other"}
+BUILDERS = {}   # filled in below: games that have a stats importer
 
 
 # ---------------------------------------------------------------- helpers
@@ -442,8 +444,12 @@ def main():
         src = cfg.get("source")
         has_source = bool(src) and (glob.glob(str(ROOT / src)) if game == "cfb" else (ROOT / src).exists())
         if has_source:
+            if game not in BUILDERS:
+                print(f"  ! no stats importer for '{game}' yet; listed with stories only")
+                has_source = False
+        if has_source:
             players = Players(fixed_ids=(game == "ootp"))
-            seasons, articles, schema = (build_cfb if game == "cfb" else build_ootp)(cfg, players)
+            seasons, articles, schema = BUILDERS[game](cfg, players)
             schema["start_year"] = cfg["start_year"]
             n_players = write_players(slug, players, schema["cats"], schema["teams"])
         elif src:
@@ -459,7 +465,7 @@ def main():
         latest = seasons[max(seasons)] if seasons else None
         listing.append({
             "slug": slug, "name": cfg["name"], "short": cfg.get("short", cfg["name"]), "full": cfg.get("full", cfg["name"]),
-            "init": cfg.get("init", cfg["name"][:2].upper()), "game": game, "group": GAME_GROUP[game], "status": cfg.get("status", "current"),
+            "init": cfg.get("init", cfg["name"][:2].upper()), "game": game, "group": GAME_GROUP.get(game, game.upper()), "status": cfg.get("status", "current"),
             "p": cfg.get("p", "#2B3040"), "s": cfg.get("s", "#9AA0AE"), "start_year": cfg.get("start_year"),
             "seasons": sorted(seasons), "current_year": max(seasons) if seasons else None,
             "latest": {"year": latest["year"], "record": latest["record"]} if latest else None,
@@ -469,6 +475,8 @@ def main():
     write_json(OUT / "dynasties.json", listing)
     print("done ->", OUT)
 
+
+BUILDERS.update({"cfb": build_cfb, "ootp": build_ootp})
 
 if __name__ == "__main__":
     main()

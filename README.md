@@ -34,9 +34,26 @@ Player matching across seasons uses the name, since the report has no player IDs
 
 `start_year` in `dynasties.json` is the first season you actually played (1997 for your Reds save). Everything earlier is shown as history. Player pages show the full career with a "Dynasty begins" divider and separate **before dynasty** and **since dynasty began** totals. Milestone badges (50, 100, 200-game club) count only games since the dynasty began. If your first played season was 1996, change `start_year` to 1996.
 
+## Control panel (create and delete dynasties from the site)
+
+Open your site and click **Control Panel** in the sidebar (or go to `#/admin`). It lists your dynasties, lets you create a new one for any game, and lets you delete one. A static site can't save files, so the panel talks to GitHub from your browser and saves each change as a commit. The site then redeploys by itself.
+
+First time only, connect it with a token:
+
+1. Open https://github.com/settings/personal-access-tokens/new
+2. Name it "Dynasty Archive", pick an expiration, choose **Only select repositories**, and pick this repo.
+3. Under **Repository permissions**, set **Contents** to **Read and write**. Generate the token.
+4. Paste it into the panel along with your GitHub username and repo name.
+
+The token stays in your browser only. It is forgotten when you close the tab unless you tick "Remember on this device". Only someone with your token can change anything, so the public page can't be used to edit your site. Disconnect from the panel any time, and revoke the token on GitHub if you lose a device.
+
+If you also build on your computer, pull the latest changes in GitHub Desktop first, so a build doesn't overwrite what you did in the panel.
+
 ## Add stories
 
-Save each story as a markdown file in `content/<dynasty>/`. See `content/reds/_example.md` for the format. CFB27 recaps that are inside the season report are imported automatically.
+**From the Control Panel (no build needed):** the Stories section has two tools. **Write a story** is a form for anything that isn't a game report: pick a type (recap, preview, season review, feature or other), a headline, the season, and the text. **Import story files** takes one or several .md files, shows a preview, and publishes them. For files with no front matter it fills in the season and type from the boxes. Both save the story to your repo and update the site, and you can delete stories from the list there too. Stories that came from a season report can't be deleted this way, since the next build would bring them back.
+
+**Or by hand:** save each story as a markdown file in `content/<dynasty>/`. See `content/reds/_example.md` for the format. CFB27 recaps that are inside the season report are imported automatically.
 
 ## Add another dynasty
 

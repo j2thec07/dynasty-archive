@@ -140,3 +140,23 @@ article.read hr{border:0;border-top:1px solid var(--line);margin:2em 0}
 @media (max-width:760px){.shell{grid-template-columns:1fr}.side{border:0;border-bottom:1px solid var(--line);min-height:0}.nav{display:none}.top{justify-content:space-between;gap:12px}.brand small{display:none}
 .ov{grid-template-columns:1fr;grid-template-areas:"sch" "led" "rt" "rec" "ros" "sto"}.rt{grid-template-columns:1fr}.rec{grid-template-columns:1fr}.rec .yr{padding:16px;font-size:54px}
 .hero{padding:44px 18px 20px}.seasonsel{top:10px;right:12px}main,.page{padding:16px 14px 40px}.mono{font-size:200px}.srch{width:130px}.crest{width:84px;height:96px;font-size:32px}.tabs{padding:0 14px;gap:22px}}
+
+/* control panel */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.fgrid .full{grid-column:1/-1}
+label.f span{display:block;font:600 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+label.f input,label.f select{width:100%;background:var(--bg);border:1px solid var(--line);padding:9px 12px}
+label.f input[type=color]{padding:2px;height:40px;cursor:pointer}
+label.f.chk{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+label.f.chk input{width:auto}
+.btn{cursor:pointer;color:var(--ink)}
+.btn.danger{border-color:var(--loss);color:var(--loss);padding:6px 12px}
+.btn.danger:hover{background:var(--loss);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.msg{padding:12px 14px;margin:0 0 14px;border:1px solid var(--line);border-left-width:5px;background:var(--panel);font-size:14px}
+.msg.ok{border-left-color:var(--win)}.msg.err{border-left-color:var(--loss)}
+.msg a{color:var(--gold)}
+.sw{display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-1px}
+.gap{height:16px}
+label.f textarea{width:100%;background:var(--bg);border:1px solid var(--line);padding:10px 12px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+input[type=file]{width:100%;padding:8px;border:1px dashed var(--line);background:var(--bg)}
