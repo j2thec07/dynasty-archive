@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "umass", "name": "UMass", "short": "UMass", "full": "Massachusetts", "init": "UM",
+    "game": "cfb", "status": "current", "p": "#881C1C", "s": "#C9CCD1",
+    "start_year": 2026, "source": "imports/umass/*.html"
+  },
+  {
+    "slug": "reds", "name": "Cincinnati Reds", "short": "Reds", "full": "Cincinnati Reds", "init": "CIN",
+    "game": "ootp", "status": "current", "p": "#C6011F", "s": "#E6E6E6",
+    "start_year": 1997, "source": "imports/reds/csv"
+  },
+  {
+    "slug": "ulm", "name": "UL-Monroe", "short": "UL-Monroe", "full": "Louisiana-Monroe", "init": "UL",
+    "game": "cfb", "status": "archived", "p": "#7A1C2E", "s": "#E0A800", "start_year": 2026
+  },
+  {
+    "slug": "gsu", "name": "Georgia State", "short": "Georgia State", "full": "Georgia State", "init": "GS",
+    "game": "cfb", "status": "archived", "p": "#0039A6", "s": "#D52B1E", "start_year": 2026
+  }
+]
